@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import API from "../../utils/API";
+// import API from "../../utils/API";
 // import { Link } from "react-router-dom";
-import { Deck } from "../../components/Decks"
+import Deck from "../../components/Decks"
 // import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
@@ -9,7 +9,9 @@ import { Deck } from "../../components/Decks"
 class Decks extends Component {
   render() {
     return (
-      <div>Deck</div>
+      <div>Deck
+        <Deck/>
+      </div>
     );
   }
 }
