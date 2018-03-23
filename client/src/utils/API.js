@@ -1,10 +1,11 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
+  // Gets all questions
   getQuestions: function() {
     return axios.get("/api/questions");
   },
+  //Gets all decks
   getDecks: function() {
     return axios.get("/api/decks");
   }
