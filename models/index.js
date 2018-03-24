@@ -1,5 +1,5 @@
 module.exports = {
-    interviewQuestion: require("./interviewQuestion"),
+    interviewQuestion: require("./InterviewQuestion"),
     Deck: require("./Deck")
 
   };
