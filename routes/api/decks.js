@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const decksController = require("../../controllers/decksController");
 
-router.route("/decks").get(decksController.findAll);
 
   router.route("/")
   .get(decksController.findAll)

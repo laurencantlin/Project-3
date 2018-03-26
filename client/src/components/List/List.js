@@ -1,15 +1,13 @@
 import React from "react";
 import "./List.css";
-import {Collection, CollectionItem} from "react-materialize";
+import { Collection, CollectionItem } from "react-materialize";
+import { Link } from "react-router-dom";
 
-export const List = (props) => {
+export const List = ({ children }) => {
   return (
-    <Collection>
-      <CollectionItem href="#">Question</CollectionItem>
-      <CollectionItem href="#">Question</CollectionItem>
-      <CollectionItem href="#">Question</CollectionItem>
-      <CollectionItem href="#">Question</CollectionItem>
-    </Collection>
+      <Collection>    
+      {children}
+      </Collection>
   );
 };
 export default List;

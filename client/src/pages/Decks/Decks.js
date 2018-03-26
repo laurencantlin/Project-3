@@ -10,7 +10,7 @@ class Decks extends Component {
 
   componentDidMount() {
     this.loadDecks();
-    console.log(this.state.decks);
+    // console.log(this.state.decks);
   }
   loadDecks = () => {
     API.getDecks()
@@ -19,13 +19,20 @@ class Decks extends Component {
       )
       .catch(err => console.log(err));
   };
+  onDeckClick = event => {
+    const btnType = event.target.value;
+    console.log(btnType);
+  }
 
   render() {
     return (
       <div>
 
         <Container>
-          {this.state.decks.map(deck => <Deck deckText= { deck.DeckName }/>)}
+          {this.state.decks.map(deck => <Deck
+            deckText={deck.DeckName}
+            key={deck.DeckName}
+            handleBtnClick={this.onDeckClick}/>)}
 
         </Container>
       </div>
