@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const questionsController = require("../../controllers/questionsController");
 
-router.route("/questions").get(questionsController.findAll);
+router.route("/")
+  .get(questionsController.findAll);
 
-  router.route("/")
-  .get(questionsController.findAll)
+router
+  .route("/:deckname")
+  .get(questionsController.findByDeck);
 
 // // Matches with "/api/books/:id"
 // router

@@ -15,6 +15,8 @@ const App = () =>
         <Route exact path="/" component={Decks} />
         <Route exact path="/decks" component={Decks} />
         <Route exact path="/questions" component={Questions} />
+        <Route exact path="/questions/:deckname" component={Questions} />
+
         <Route exact path="/practicesetup" component={PracticeSetup} />
         <Route exact path="/practicesession" component={PracticeSession} />
 
