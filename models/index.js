@@ -1,6 +1,7 @@
 module.exports = {
     interviewQuestion: require("./InterviewQuestion"),
-    Deck: require("./Deck")
+    Deck: require("./Deck"),
+    Category: require("./Category"),
 
   };
   

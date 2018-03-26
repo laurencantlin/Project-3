@@ -1,12 +1,15 @@
 import React from "react";
 import "./List.css";
+import {Collection, CollectionItem} from "react-materialize";
 
-export const List = ({ children }) => {
+export const List = (props) => {
   return (
-    <div className="list-overflow-container">
-      <ul className="list-group">
-        {children}
-      </ul>
-    </div>
+    <Collection>
+      <CollectionItem href="#">Question</CollectionItem>
+      <CollectionItem href="#">Question</CollectionItem>
+      <CollectionItem href="#">Question</CollectionItem>
+      <CollectionItem href="#">Question</CollectionItem>
+    </Collection>
   );
 };
+export default List;

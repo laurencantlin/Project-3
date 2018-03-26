@@ -1,16 +1,33 @@
 import React, { Component } from "react";
-// import API from "../../utils/API";
-// import { Link } from "react-router-dom";
-import Deck from "../../components/Decks"
-// import { Col, Row, Container } from "../../components/Grid";
-// import { List, ListItem } from "../../components/List";
-// import { Input, TextArea, FormBtn } from "../../components/Form";
+import Deck from "../../components/Deck"
+import API from "../../utils/API";
+import Container from "react-materialize/lib/Container";
 
 class Decks extends Component {
+  state = {
+    decks: [],
+  };
+
+  componentDidMount() {
+    this.loadDecks();
+    console.log(this.state.decks);
+  }
+  loadDecks = () => {
+    API.getDecks()
+      .then(res => (
+        this.setState({ decks: res.data }))
+      )
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
-      <div>Deck
-        <Deck/>
+      <div>
+
+        <Container>
+          {this.state.decks.map(deck => <Deck deckText= { deck.DeckName }/>)}
+
+        </Container>
       </div>
     );
   }

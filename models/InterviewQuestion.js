@@ -13,9 +13,9 @@ var interviewQuestion = sequelize.define("interviewQuestion", {
     type: Sequelize.STRING
   },
   in_deck: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
-  category: {
+  in_category: {
     type: Sequelize.STRING
   }
 }, {
