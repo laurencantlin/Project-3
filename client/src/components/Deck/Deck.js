@@ -8,7 +8,7 @@ const Deck = props => (
     <Row>
       <Col s={12}>
       <Link to={"/questions/" + props.deckText }>
-        <CardPanel className="blue-grey lighten-4 black-text"  onClick={props.handleBtnClick} value={props.deckText}>
+        <CardPanel className="white lighten-4 black-text"  onClick={props.handleBtnClick} value={props.deckText}>
           <span>{props.deckText}</span>
         </CardPanel></Link>
       </Col>

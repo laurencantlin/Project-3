@@ -1,5 +1,9 @@
+.div{
+    min-height:100%;
+}
 .card-panel {
     /* width: 250px;; */
+    background-color: white;
 }
 
 

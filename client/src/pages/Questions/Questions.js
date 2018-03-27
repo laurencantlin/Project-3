@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import List from "../../components/List"
-import ListItem from "../../components/List"
 import Container from "../../components/Container"
 import API from "../../utils/API";
-import { Collection, CollectionItem } from "react-materialize";
-
-import { Link } from "react-router-dom";
+import { CollectionItem, Badge } from "react-materialize";
+import "./Questions.css";
 
 class Questions extends Component {
 
@@ -28,17 +26,15 @@ class Questions extends Component {
         return (
             <div>
                 <Container>
-
+                    <h3>Deck</h3>
                     <List>
-                        {this.state.questions.map(elem => (
-                           <ListItem key={elem.question}><Link to={"/questions"}><strong>{elem.question}</strong></Link></ListItem>
-                        ))}
+                        {this.state.questions.map((elem, index) => (
+                            <CollectionItem key={elem.question} href="/decks"> {index+1}.  {elem.question}     <Badge  >{elem.in_category}</Badge>
 
-                        {/* {this.state.questions.map(question => (<CollectionItem >
-                            {question}</CollectionItem>))} */}
-                        {/* <ListItem>sd</ListItem>
-                        <ListItem></ListItem> */}
+                            </CollectionItem>
+                        ))}
                     </List>
+
                 </Container>
             </div>
         );

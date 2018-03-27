@@ -6,10 +6,12 @@ import PracticeSetup from "./pages/PracticeSetup";
 import PracticeSession from "./pages/PracticeSession";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
+import "./App.css";
+
 
 const App = () =>
   <Router>
-    <div>
+    <div className="screenview">
       <Nav />
       <Switch>
         <Route exact path="/" component={Decks} />
