@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import "./Decks.css";
 import Deck from "../../components/Deck"
+import Stack from "../../components/Stack"
 import API from "../../utils/API";
 import Container from "react-materialize/lib/Container";
+import Nav from "../../components/Nav";
 
 class Decks extends Component {
   state = {
@@ -20,20 +23,19 @@ class Decks extends Component {
       .catch(err => console.log(err));
   };
   onDeckClick = event => {
-    const btnType = event.target.value;
+    const btnType = event.target;
     console.log(btnType);
   }
 
   render() {
     return (
       <div>
-
+        <Nav />
         <Container>
-          {this.state.decks.map(deck => <Deck
-            deckText={deck.DeckName}
-            key={deck.DeckName}
-            handleBtnClick={this.onDeckClick}/>)}
-
+          <h3>Deck</h3>
+          {this.state.decks.map(deck => <Stack deckText={deck.DeckName}
+            handleBtnClick={this.onDeckClick} key={deck.DeckName}
+          >{deck.DeckName} </Stack>)}
         </Container>
       </div>
     );

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
 import { Row, Input } from "react-materialize";
+import Nav from "../../components/Nav";
 
 class PracticeSetup extends Component {
     render() {
         return (
             <div>
+                <Nav/>
                 <Container>
                     <Row>
                         <Input placeholder="Placeholder" s={6} label="First Name" />
