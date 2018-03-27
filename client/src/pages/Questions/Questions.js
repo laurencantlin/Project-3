@@ -32,7 +32,7 @@ class Questions extends Component {
                     <h3>Deck</h3>
                     <List>
                         {this.state.questions.map((elem, index) => (
-                            <CollectionItem key={elem.question} href="/decks"> {index + 1}.  {elem.question}     <Badge  >{elem.in_category}</Badge>
+                            <CollectionItem key={elem.question} href={`/questioncard/${index+1}`}> {index + 1}.  {elem.question}     <Badge  >{elem.in_category}</Badge>
 
                             </CollectionItem>
                         ))}

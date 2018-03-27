@@ -1,3 +1,3 @@
-export * from "./Input";
-export * from "./TextArea";
-export * from "./FormBtn";
+export {default} from "./Input";
+// export {default} from "./TextArea";
+// export {default} from "./FormBtn";

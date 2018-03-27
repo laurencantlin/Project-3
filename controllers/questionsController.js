@@ -17,5 +17,15 @@ module.exports = {
       })
       .then((results) => res.json(results))
       .catch(err => res.status(422).json(err));
+  },
+  findQuestion: function (req, res) {
+    db.interviewQuestion
+      .findAll({
+        where: {
+          id:req.params.questionid
+        }
+      })
+      .then((results) => res.json(results))
+      .catch(err => res.status(422).json(err));
   }
 };

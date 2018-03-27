@@ -3,11 +3,13 @@ import "./List.css";
 import { Collection, CollectionItem } from "react-materialize";
 import { Link } from "react-router-dom";
 
-export const List = ({ children }) => {
+export const List = ( {props, children }) => {
   return (
-      <Collection>    
+    <Collection>
+     {/* <Link to={props.link}> */}
       {children}
-      </Collection>
+    {/* </Link> */}
+    </Collection>
   );
 };
 export default List;

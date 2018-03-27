@@ -5,9 +5,9 @@ import "./Card.css";
 const Card = props => (
   <div>
     <Row>
-      <Col s={12} m={5}>
-        <CardPanel className="grey lighten-4 black-text">
-          <span>I am a card component</span>
+      <Col s={12} m={6} offset="m3">
+        <CardPanel className="black-text">
+          <span>{props.cardText}</span>
         </CardPanel>
       </Col>
     </Row>

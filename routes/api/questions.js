@@ -8,6 +8,11 @@ router
   .route("/:deckname")
   .get(questionsController.findByDeck);
 
+
+router
+.route("/id/:questionid")
+.get(questionsController.findQuestion);
+
 // // Matches with "/api/books/:id"
 // router
 //   .route("/:id")
