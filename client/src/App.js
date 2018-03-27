@@ -5,14 +5,14 @@ import Questions from "./pages/Questions";
 import PracticeSetup from "./pages/PracticeSetup";
 import PracticeSession from "./pages/PracticeSession";
 import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
+// import Nav from "./components/Nav";
 import "./App.css";
 
 
 const App = () =>
   <Router>
     <div className="screenview">
-      <Nav />
+      {/* <Nav /> */}
       <Switch>
         <Route exact path="/" component={Decks} />
         <Route exact path="/decks" component={Decks} />

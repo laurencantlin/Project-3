@@ -4,6 +4,7 @@ import Container from "../../components/Container"
 import API from "../../utils/API";
 import { CollectionItem, Badge } from "react-materialize";
 import "./Questions.css";
+import Nav from "../../components/Nav";
 
 class Questions extends Component {
 
@@ -25,11 +26,13 @@ class Questions extends Component {
     render() {
         return (
             <div>
+                <Nav />
+
                 <Container>
                     <h3>Deck</h3>
                     <List>
                         {this.state.questions.map((elem, index) => (
-                            <CollectionItem key={elem.question} href="/decks"> {index+1}.  {elem.question}     <Badge  >{elem.in_category}</Badge>
+                            <CollectionItem key={elem.question} href="/decks"> {index + 1}.  {elem.question}     <Badge  >{elem.in_category}</Badge>
 
                             </CollectionItem>
                         ))}
