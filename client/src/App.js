@@ -5,6 +5,8 @@ import Questions from "./pages/Questions";
 import PracticeSetup from "./pages/PracticeSetup";
 import PracticeSession from "./pages/PracticeSession";
 import NoMatch from "./pages/NoMatch";
+import CardPage from "./pages/CardPage";
+
 // import Nav from "./components/Nav";
 import "./App.css";
 
@@ -18,6 +20,8 @@ const App = () =>
         <Route exact path="/decks" component={Decks} />
         <Route exact path="/questions" component={Questions} />
         <Route exact path="/questions/:deckname" component={Questions} />
+        <Route exact path="/card" component={CardPage} />
+        <Route exact path="/questioncard/:questionid" component={CardPage} />
 
         <Route exact path="/practicesetup" component={PracticeSetup} />
         <Route exact path="/practicesession" component={PracticeSession} />

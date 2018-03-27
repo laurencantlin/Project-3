@@ -1,30 +1,47 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
-import { Row, Input } from "react-materialize";
-import Nav from "../../components/Nav";
+// import Input from "../../components/Form";
+import API from "../../utils/API";
 
+import { Row, Col, Input } from "react-materialize";
+import Nav from "../../components/Nav";
+import "./form.css";
 class PracticeSetup extends Component {
+    state = {
+        decks: []
+
+    };
+
+    componentDidMount() {
+        this.loadDecks();
+        // console.log(this.state.decks);
+    }
+    loadDecks = () => {
+        API.getDecks()
+            .then(res => (
+                this.setState({ decks: res.data }))
+            )
+            .catch(err => console.log(err));
+    };
     render() {
         return (
             <div>
-                <Nav/>
+                <Nav />
                 <Container>
-                    <Row>
-                        <Input placeholder="Placeholder" s={6} label="First Name" />
-                        <Input s={6} label="Last Name" />
-                        <Input s={12} label="disabled" defaultValue="I am not editable" disabled />
-                        <Input type="password" label="password" s={12} />
-                        <Input type="email" label="Email" s={12} />
-                    </Row>
-                    <Row>
-                        <Input name='group1' type='checkbox' value='red' label='Red' />
-                    </Row>
-<Row>
-    Include Decks:
-    </Row>
-                    <Row>
-                        <Input name='group1' type='checkbox' value='red' label='Deck A' />
-                    </Row>
+                    <form>
+                        {/* <Row> */}
+                        {/* <Input placeholder="Placeholder" s={6} label="First Name" />
+                            <Input s={12} label="Last Name" />
+                            <Input s={12} label="disabled" defaultValue="I am not editable" disabled /> */}
+                       
+                        {/* </Row> */}
+                        <Row>
+                            Include Decks:
+                        </Row>
+                        {this.state.decks.map(deck => <Row><Input name='group1' type='checkbox' label={deck.DeckName} /></Row>)}
+
+                    </form>
+
                 </Container>
             </div>
         );
