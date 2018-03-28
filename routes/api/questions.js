@@ -7,7 +7,11 @@ router.route("/")
 router
   .route("/:deckname")
   .get(questionsController.findByDeck);
+  router
 
+  router
+  .route("/indecks/:deckname")
+  .get(questionsController.findByDecks);
 
 router
 .route("/id/:questionid")

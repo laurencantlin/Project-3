@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import Container from "../../components/Container";
 // import Input from "../../components/Form";
 import API from "../../utils/API";
-
+import { Link } from "react-router-dom";
 import { Row, Col, Input } from "react-materialize";
 import Nav from "../../components/Nav";
 import "./form.css";
+
 class PracticeSetup extends Component {
     state = {
         decks: []
-
     };
 
     componentDidMount() {
@@ -41,6 +41,7 @@ class PracticeSetup extends Component {
                         {this.state.decks.map(deck => <Row><Input name='group1' type='checkbox' label={deck.DeckName} /></Row>)}
 
                     </form>
+                    <Link to="/practicesession">Practice</Link>
 
                 </Container>
             </div>

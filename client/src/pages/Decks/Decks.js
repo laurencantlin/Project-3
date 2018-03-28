@@ -5,6 +5,7 @@ import Stack from "../../components/Stack"
 import API from "../../utils/API";
 import Container from "react-materialize/lib/Container";
 import Nav from "../../components/Nav";
+import { Link } from "react-router-dom";
 
 class Decks extends Component {
   state = {
@@ -33,13 +34,14 @@ class Decks extends Component {
         <Nav />
         <Container>
           <h3>Deck</h3>
-          {this.state.decks.map(deck => <Stack deckText={deck.DeckName}
-            handleBtnClick={this.onDeckClick} key={deck.DeckName}
-          >{deck.DeckName} </Stack>)}
+          {this.state.decks.map(deck => <Link to={"/questions/" + deck.DeckName} className="stacklink">
+            <Stack deckText={deck.DeckName}
+              handleBtnClick={this.onDeckClick} key={deck.DeckName}
+            >{deck.DeckName} </Stack></Link>)}
         </Container>
       </div>
-    );
-  }
-}
-
-export default Decks;
+        );
+      }
+    }
+    
+    export default Decks;

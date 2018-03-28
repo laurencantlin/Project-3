@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, CardPanel } from "react-materialize";
+import { Row, Col, Input, CardPanel } from "react-materialize";
 import "./Card.css";
 
 const Card = props => (
@@ -7,7 +7,10 @@ const Card = props => (
     <Row>
       <Col s={12} m={6} offset="m3">
         <CardPanel className="black-text">
-          <span>{props.cardText}</span>
+          <span><Input type='textarea' s={12} value={props.cardText} onChange={props.handleInputChange}
+          />
+
+          </span>
         </CardPanel>
       </Col>
     </Row>

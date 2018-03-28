@@ -28,7 +28,7 @@ class Questions extends Component {
             <div>
                 <Nav />
 
-                <Container>
+                <Container classes="container">
                     <h3>Deck</h3>
                     <List>
                         {this.state.questions.map((elem, index) => (
