@@ -9,7 +9,7 @@ const Stack = props => (
       <Col s={12} >
         {/* <Link to={"/questions/" + props.deckText} className="stacklink"> */}
           <div className="card-stacked" >
-            <div className="card5" onClick={props.handleBtnClick} value={props.deckText}>
+            <div className={props.classes}  onClick={props.handleBtnClick} value={props.deckText}>
            
               {props.children}
             </div>

@@ -1,5 +1,6 @@
 const db = require("../models");
-
+const Sequelize      = require('sequelize');
+const Op=Sequelize.Op
 module.exports = {
   findAll: function (req, res) {
     console.log("controller");
@@ -21,7 +22,7 @@ module.exports = {
   findByDecks: function (req, res) {
     db.interviewQuestion
       .findAll({
-        where: {[Op.or]: ["Behavioral Interview Questions", "Coding Problems"]         }
+        where: {in_deck:["Behavioral Interview Questions","Coding Problems"]}       
       })
       .then((results) => res.json(results))
       .catch(err => res.status(422).json(err));

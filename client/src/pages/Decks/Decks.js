@@ -36,7 +36,7 @@ class Decks extends Component {
           <h3>Deck</h3>
           {this.state.decks.map(deck => <Link to={"/questions/" + deck.DeckName} className="stacklink">
             <Stack deckText={deck.DeckName}
-              handleBtnClick={this.onDeckClick} key={deck.DeckName}
+              handleBtnClick={this.onDeckClick} classes="card5"key={deck.DeckName}
             >{deck.DeckName} </Stack></Link>)}
         </Container>
       </div>
