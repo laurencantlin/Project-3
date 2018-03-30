@@ -6,7 +6,7 @@ import PracticeSetup from "./pages/PracticeSetup";
 import PracticeSession from "./pages/PracticeSession";
 import NoMatch from "./pages/NoMatch";
 import CardPage from "./pages/CardPage";
-
+import 'bulma/css/bulma.css'
 // import Nav from "./components/Nav";
 import "./App.css";
 

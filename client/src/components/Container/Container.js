@@ -1,11 +1,12 @@
 import React from "react";
 import "./Container.css";
 
-const Card = props => (
-  <div className={props.classes}>{props.children}
-   
+const Container = props => (
+
+  <div class="container is-transparent ">
+     {props.children}
   </div>
 
 );
 
-export default Card;
+export default Container;
