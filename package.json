@@ -21,11 +21,13 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.17.2",
+    "bulma": "^0.6.2",
     "express": "^4.15.4",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.3",
     "path": "^0.12.7",
     "react-materialize": "^2.1.2",
+    "react-tooltip": "^3.4.0",
     "sequelize": "^4.37.4"
   }
 }

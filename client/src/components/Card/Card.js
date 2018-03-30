@@ -6,12 +6,16 @@ const Card = props => (
   <div>
     <Row>
       <Col s={12} m={6} offset="m3">
-        <CardPanel className="black-text">
-          <span><Input type='textarea' s={12} value={props.cardText} onChange={props.handleInputChange}
-          />
-
+        {/* <CardPanel className="black-text box"> */}
+        <div className="box card-panel">
+          <span>
+            {/* <Input type='textarea' className="textarea" s={12} value={props.cardText} onChange={props.handleInputChange}
+          /> */}
+            <textarea  className="textarea is-medium" rows="5" s={12} value={props.cardText} onChange={props.handleInputChange}
+            />
           </span>
-        </CardPanel>
+        </div>
+        {/* </CardPanel> */}
       </Col>
     </Row>
   </div>

@@ -1,10 +1,10 @@
 .card-stacked {
     position: relative;
-    display: inline-block;
+    /* display: inline-block; */
     /* margin: 30px; */
     width: 100%;
     height:100%;
-    /* overflow: auto; */
+    /* overflow: visible; */
 
 }
 
@@ -48,4 +48,11 @@
     font-size: 20px;
     line-height: 1;
     
+}
+.session-question{
+    padding: 60px 20px;
+    color: rgb(53, 57, 62);
+    font-size: 17px;
+    text-align: center;
+    min-height: 200px;
 }

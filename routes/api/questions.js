@@ -10,7 +10,7 @@ router
   router
 
   router
-  .route("/indecks/:deckname")
+  .route("/indecks")
   .get(questionsController.findByDecks);
 
 router

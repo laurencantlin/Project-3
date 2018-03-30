@@ -6,7 +6,7 @@ import Nav from "../../components/Nav";
 import { Row, Col } from "react-materialize";
 import Card from "../../components/Card"
 import IconBtn from "../../components/IconBtn"
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 class CardPage extends Component {
     state = {
         questionid: window.location.pathname.split("/").pop(),
@@ -81,11 +81,12 @@ class CardPage extends Component {
     renderCardToolIcons = () => {
         if (this.state.view === "front" || this.state.view === "back") {
             return <div>
-                <Col s={1} offset="m3" className='grid-example'>
-                    <IconBtn left onClick={this.toggleView} icon="autorenew">view_agenda</IconBtn>
+                <Col s={2} offset="m3" className='grid-example'>
+                    <IconBtn flat spanclasses="has-text-dark icon " icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
+
                 </Col>
-                <Col s={1} offset="s10 m4" className='grid-example'>
-                    <IconBtn right onClick={this.flipCard} icon="autorenew">autorenew</IconBtn>
+                <Col s={1} offset="s10 m3" className='grid-example'>
+                    <IconBtn onClick={this.flipCard} spanclasses="has-text-dark icon" icon="fas fa-lg fa-retweet" ></IconBtn>
                 </Col>
             </div>
         }
@@ -93,7 +94,8 @@ class CardPage extends Component {
             console.log("hi")
             return <div>
                 <Col s={1} offset="m3" className='grid-example'>
-                    <IconBtn left onClick={this.toggleView} icon="autorenew">crop_landscape</IconBtn>
+                <IconBtn flat spanclasses="has-text-dark icon " icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
+
                 </Col>
             </div>
         }
@@ -108,10 +110,10 @@ class CardPage extends Component {
                     </Row>
                     <Row>
                         <Col s={1} className='grid-example'>
-                            <IconBtn medium onClick={this.flipCard} icon="">chevron_left</IconBtn>
+                            <IconBtn flat medium onClick={this.flipCard} icon="">chevron_left</IconBtn>
                         </Col>
                         <Col s={1} offset="s10" className='grid-example'>
-                            <IconBtn medium right onClick={this.flipCard} icon="autorenew">chevron_right</IconBtn>
+                            <IconBtn flat medium right onClick={this.flipCard} icon="add">chevron_right</IconBtn>
                         </Col>
                     </Row>
                     <Row>
@@ -119,7 +121,9 @@ class CardPage extends Component {
                         {this.renderCard()}
                     </Row>
                     <Row>
-
+                        <div className="is-centered buttons">
+                        <span className="button is-centered is-primary">Save Changes</span>
+</div>
                     </Row>
                 </Container>
             </div>
