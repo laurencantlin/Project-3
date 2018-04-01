@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Col, CardPanel, Input } from "react-materialize";
+import {Row, Col, CardPanel } from "react-materialize";
 import "./Stack.css";
 import { Link } from "react-router-dom";
 

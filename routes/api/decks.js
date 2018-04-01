@@ -4,7 +4,7 @@ const decksController = require("../../controllers/decksController");
 
   router.route("/")
   .get(decksController.findAll)
-
+  .post(decksController.newDeck)
 // // Matches with "/api/books/:id"
 // router
 //   .route("/:id")

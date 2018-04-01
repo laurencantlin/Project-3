@@ -10,8 +10,9 @@ import IconBtn from "../../components/IconBtn"
 class CardPage extends Component {
     state = {
         questionid: window.location.pathname.split("/").pop(),
-        question: [],
-        view: "front"
+        question: "",
+        view: "front",
+        updatedQuestion: { answer: "", question: "" }
     }
 
     componentDidMount() {
@@ -43,13 +44,27 @@ class CardPage extends Component {
         event.preventDefault();
         console.log(event.target.value, "ans inputchange")
         this.setState({ answer: event.target.value });
+        this.setState({
+            updatedQuestion: { answer: event.target.value }
+        });
     }
     handleQuestionInputChange = (event) => {
         event.preventDefault();
         console.log(event.target.value, "q inputchange")
         this.setState({ question: event.target.value });
-
+        this.setState({
+            updatedQuestion: { question: event.target.value }
+        });
     }
+    onSaveChanges = (event) => {
+        event.preventDefault();
+        console.log("clicksave")
+        API.updateQuestion(this.state.questionid,this.state.updatedQuestion)
+            .then(res => this.loadQCard(this.state.questionid))
+            // .then(res=> this.event.value="")
+            .catch(err => console.log(err));
+    };
+
     toggleView = (event) => {
         event.preventDefault();
         if (this.state.view === "front" || this.state.view === "back") {
@@ -63,6 +78,7 @@ class CardPage extends Component {
             this.renderCardToolIcons();
         }
     }
+
     renderCard = () => {
         if (this.state.view === "front") {
             return <Card cardText={this.state.question} handleInputChange={this.handleQuestionInputChange}></Card>
@@ -94,7 +110,7 @@ class CardPage extends Component {
             console.log("hi")
             return <div>
                 <Col s={1} offset="m3" className='grid-example'>
-                <IconBtn flat spanclasses="has-text-dark icon " icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
+                    <IconBtn flat spanclasses="has-text-dark icon " icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
 
                 </Col>
             </div>
@@ -122,8 +138,8 @@ class CardPage extends Component {
                     </Row>
                     <Row>
                         <div className="is-centered buttons">
-                        <span className="button is-centered is-primary">Save Changes</span>
-</div>
+                            <span onClick={this.onSaveChanges} className="button is-centered is-primary">Save Changes</span>
+                        </div>
                     </Row>
                 </Container>
             </div>
