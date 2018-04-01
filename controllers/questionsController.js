@@ -1,6 +1,6 @@
 const db = require("../models");
-const Sequelize      = require('sequelize');
-const Op=Sequelize.Op
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op
 module.exports = {
   findAll: function (req, res) {
     console.log("controller");
@@ -13,7 +13,7 @@ module.exports = {
     db.interviewQuestion
       .findAll({
         where: {
-          in_deck:req.params.deckname
+          in_deck: req.params.deckname
         }
       })
       .then((results) => res.json(results))
@@ -22,7 +22,7 @@ module.exports = {
   findByDecks: function (req, res) {
     db.interviewQuestion
       .findAll({
-        where: {in_deck:["Behavioral Interview Questions","Coding Problems"]}       
+        where: { in_deck: ["Behavioral Interview Questions", "Coding Problems"] }
       })
       .then((results) => res.json(results))
       .catch(err => res.status(422).json(err));
@@ -31,26 +31,25 @@ module.exports = {
     db.interviewQuestion
       .findAll({
         where: {
-          id:req.params.questionid
+          id: req.params.questionid
         }
       })
       .then((results) => res.json(results))
       .catch(err => res.status(422).json(err));
   },
-  
-newQuestion: function(req, res) {
+  newQuestion: function (req, res) {
     db.interviewQuestion
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  updateQuestion: function(req, res) {
+  updateQuestion: function (req, res) {
     db.interviewQuestion
-      .findOneAndUpdate({ _id: req.params.questionid}, req.body)
+      .update(req.body, {where:{ id: req.params.questionid }})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  deleteQuestion: function(req, res) {
+  deleteQuestion: function (req, res) {
     db.interviewQuestion
       .findById({ _id: req.params.questionid })
       .then(dbModel => dbModel.remove())
