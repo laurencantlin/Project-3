@@ -31,5 +31,10 @@ export default {
   updateQuestion: function (questionid, questionData) {
     return axios.put("/api/questions/id/" + questionid, questionData);
   },
-
+  signUp: function (userLoginData) {
+    return axios.post("/api/login/signup", userLoginData);
+  },
+  login: function (userLoginData) {
+    return axios.post("/api/login",userLoginData);
+  },
 };

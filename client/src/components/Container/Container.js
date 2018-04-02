@@ -3,8 +3,11 @@ import "./Container.css";
 
 const Container = props => (
 
-  <div class="container is-transparent ">
+  <div className="container ">
+    {/* <div className="level "> */}
+
      {props.children}
+  {/* </div> */}
   </div>
 
 );

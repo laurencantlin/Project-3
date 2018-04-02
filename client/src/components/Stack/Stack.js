@@ -1,12 +1,11 @@
 import React from "react";
-import {Row, Col, CardPanel } from "react-materialize";
+// import {Row, Col } from "react-materialize";
 import "./Stack.css";
 import { Link } from "react-router-dom";
 
 const Stack = props => (
   <div>
-    <Row>
-      <Col s={12} >
+      {/* <div className="column"> */}
         {/* <Link to={"/questions/" + props.deckText} className="stacklink"> */}
           <div className="card-stacked" >
             <div className={props.className}  onClick={props.handleBtnClick} value={props.deckText}>
@@ -15,10 +14,9 @@ const Stack = props => (
             </div>
             <div className="lower-card"></div>
 
-          </div>
+          {/* </div> */}
         {/* </Link> */}
-      </Col>
-    </Row>
+    </div>
   </div>
 );
 

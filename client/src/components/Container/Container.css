@@ -1,11 +1,13 @@
-/* .container {
-    min-height: calc(100vh - 94px);
-    height: 100%;
+.container {
+    /* min-height: calc(100vh - 94px); */
+    /* height: 100%; */
+    position: relative;
+    z-index: 0;
 }
-.boo {
+/* .boo {
     min-height: calc(100vh - 94px);
 
     background-color: #384459;
     min-height: calc(100vh);
     height: 100%;
-} */
+} */ 

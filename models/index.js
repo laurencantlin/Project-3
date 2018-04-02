@@ -1,7 +1,6 @@
 module.exports = {
-    interviewQuestion: require("./InterviewQuestion"),
-    Deck: require("./Deck"),
-    Category: require("./Category"),
-
-  };
-  
+  interviewQuestion: require("./InterviewQuestion"),
+  Deck: require("./Deck"),
+  Category: require("./Category"),
+  User:require("./User")
+};

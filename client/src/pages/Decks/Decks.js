@@ -34,9 +34,9 @@ class Decks extends Component {
     console.log(this.state.newDeck);
     const newDeck = { DeckName: this.state.newDeck }
     API.postDeck(newDeck)
-    .then(res => this.loadDecks())
-    // .then(res=> this.event.value="")
-    .catch(err => console.log(err));
+      .then(res => this.loadDecks())
+      // .then(res=> this.event.value="")
+      .catch(err => console.log(err));
   }
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -49,37 +49,46 @@ class Decks extends Component {
     return (
       <div>
         <Nav />
-        <section class="section">
-          <div class="container">
-            <h3 class=" is-1 title">Decks</h3>
+        <section className="section">
+          <div className="container">
+            <h3 className=" is-1 title">Decks</h3>
 
-            {/* <h2 class="subtitle">
+            {/* <h2 className="subtitle">
                 A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
       </h2> */}
           </div>
         </section>
-        <Container >
-          <Stack
-            className="card5"><div class="field is-grouped">
-              <p class="control is-expanded">
-                <input class="input" type="text" onChange={this.handleInputChange} placeholder="Create a new deck" />
-              </p>
-              <p class="control">
-                <button class="button is-primary" onClick={this.onClickAddDeck}>Add Deck</button>
+        <Container>
+          <div className="columns is-4 is-multiline ">
+            <div className="column is-narrow is-12">
+              {/* {/* <Stack
+                // className="card5"> */}
+                
+                <div className="field is-grouped">
+                 <p className="control is-expanded"> 
+                    <input className="input" type="text" onChange={this.handleInputChange} placeholder="Create a new deck" />
+                  </p>
+                  <p className="control">
+                    <button className="button is-primary" onClick={this.onClickAddDeck}>Add Deck</button>
 
-              </p>
-            </div> </Stack>
-          <p className="has-text-dark	">
-            {this.state.decks.map(deck => <Link to={"/questions/" + deck.DeckName} className="stacklink">
-              <Stack deckText={deck.DeckName}
-                handleBtnClick={this.onDeckClick} className="card5" key={deck.DeckName}>  {deck.DeckName} </Stack>
-            </Link>)}
+                  </p>
+                {/* {/* </div> </Stack>    */}
+                </div> 
+                </div> 
 
-          </p>
-          {/* <Link  className="stacklink"> */}
+            {/* <p className="has-text-dark	"> */}
+            {this.state.decks.map(deck => (<div className="column is-4" key={deck.id}>
+              <Link to={"/questions/" + deck.DeckName} className="stacklink" >
+                <Stack deckText={deck.DeckName}
+                  handleBtnClick={this.onDeckClick} key={deck.DeckName} className="card5" >  {deck.DeckName} </Stack>
+              </Link></div>))}
 
-          {/* </Link> */}
+            {/* </p> */}
+            {/* <Link  className="stacklink"> */}
 
+            {/* </Link> */}
+          </div>
+          {/* </div> */}
         </Container>
 
 
