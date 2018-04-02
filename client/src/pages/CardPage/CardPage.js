@@ -3,7 +3,7 @@ import Stack from "../../components/Stack"
 import API from "../../utils/API";
 import Container from "react-materialize/lib/Container";
 import Nav from "../../components/Nav";
-import { Row, Col } from "react-materialize";
+import { Row, Col, Toast} from "react-materialize";
 import Card from "../../components/Card"
 import IconBtn from "../../components/IconBtn"
 // import { Link } from "react-router-dom";
@@ -47,6 +47,7 @@ class CardPage extends Component {
         this.setState({
             updatedQuestion: { answer: event.target.value }
         });
+
     }
     handleQuestionInputChange = (event) => {
         event.preventDefault();
@@ -59,7 +60,7 @@ class CardPage extends Component {
     onSaveChanges = (event) => {
         event.preventDefault();
         console.log("clicksave")
-        API.updateQuestion(this.state.questionid,this.state.updatedQuestion)
+        API.updateQuestion(this.state,this.state.updatedQuestion)
             .then(res => this.loadQCard(this.state.questionid))
             // .then(res=> this.event.value="")
             .catch(err => console.log(err));
