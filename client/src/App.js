@@ -6,6 +6,8 @@ import PracticeSetup from "./pages/PracticeSetup";
 import PracticeSession from "./pages/PracticeSession";
 import NoMatch from "./pages/NoMatch";
 import CardPage from "./pages/CardPage";
+import Login from "./pages/Login";
+
 import 'bulma/css/bulma.css'
 // import Nav from "./components/Nav";
 import "./App.css";
@@ -17,6 +19,8 @@ const App = () =>
       {/* <Nav /> */}
       <Switch>
         <Route exact path="/" component={Decks} />
+        <Route exact path="/login" component={Login} />
+
         <Route exact path="/decks" component={Decks} />
         <Route exact path="/questions" component={Questions} />
         <Route exact path="/questions/:deckname" component={Questions} />
