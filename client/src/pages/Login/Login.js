@@ -14,6 +14,46 @@ class Login extends Component {
             email: value
         });
     };
+    
+    handlePWChange = event => {
+        event.preventDefault();
+
+        console.log(this.state.pw)
+        const { name, value } = event.target;
+        this.setState({
+            pw: value
+        });
+    };
+    handlePW2Change = event => {
+        event.preventDefault();
+
+        console.log(this.state.pw)
+        const { name, value } = event.target;
+        this.setState({
+            pw2: value
+        });
+    };
+    onClickLogin = event => {
+        event.preventDefault();
+        API.login({email: this.state.email, password:this.state.pw})
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+      
+    };
+    onClickSignup = event => {
+        event.preventDefault();
+
+        console.log("signup")
+        API.signUp({email: this.state.email, password:this.state.pw})
+        .then(res => console.log(res))
+        // .then(res=> this.event.value="")
+        .catch(err => console.log(err));
+        const { name, value } = event.target;
+        this.setState({
+            pw2: value
+        });
+    };
+
     render() {
         return (
             <div>
@@ -34,7 +74,7 @@ class Login extends Component {
                                 </div>
                                 <div className="columns is-centered is-multiline">
                                     <div className="column ">
-                                    <LoginPanel />
+                                    <LoginPanel handleEmailChange={this.handleEmailChange} handlePW2Change={this.handlePW2Change} handlePWChange={this.handlePWChange} onClickSignup={this.onClickSignup} onClickLogin={this.onClickLogin}></LoginPanel>
 
                                     </div>
 

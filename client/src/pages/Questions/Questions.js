@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import List from "../../components/List"
 import Container from "../../components/Container"
+import Table from "../../components/Table"
 import API from "../../utils/API";
-import { CollectionItem, Badge } from "react-materialize";
-// import "./Questions.css";
+// import { CollectionItem, Badge } from "react-materialize";
 import Nav from "../../components/Nav";
+import { Link } from "react-router-dom";
 
 class Questions extends Component {
 
@@ -25,7 +26,7 @@ class Questions extends Component {
             .catch(err => console.log(err));
     };
     onAddQuestion = (event) => {
-            API.newQuestion(this.state.newQuestion)
+        API.newQuestion(this.state.newQuestion)
             .then(res => this.loadDeckQuestions(this.state.deck))
             // .then(res=> this.event.value="")
             .catch(err => console.log(err));
@@ -33,41 +34,46 @@ class Questions extends Component {
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
-            newQuestion: { question: value,
-            in_deck: this.state.deck}
+            newQuestion: {
+                question: value,
+                in_deck: this.state.deck,
+                in_category: "Default"
+            }
         });
     };
     render() {
         return (
             <div>
                 <Nav />
-                <section class="section">
-                    <div class="container">
+                <section className="section">
+                    <div className="container">
 
-                        <h3 class=" is-1 title">{this.state.deck}</h3>
+                        <h3 className=" is-1 title">{this.state.deck}</h3>
 
                     </div>
                 </section>
                 <Container classes="container">
-                    <div class="columns is-centered">
-                        <div class="column is-10 ">
-                            <div class="field has-addons">
-                                <div class="control">
-                                    <input class="input" type="text" placeholder="Find a repository" onChange={this.handleInputChange} />
+                    <div className="columns is-centered">
+                        <div className="column is-10 ">
+                            <div className="field has-addons">
+                                <div className="control">
+                                    <input className="input" type="text" placeholder="Find a repository" onChange={this.handleInputChange} />
                                 </div>
-                                <div class="control">
-                                    <a class="button is-info" onClick={this.onAddQuestion} >
+                                <div className="control">
+                                    <a className="button is-info" onClick={this.onAddQuestion} >
                                         Search
     </a>
                                 </div>
                             </div>
-                            <List>
-                                {this.state.questions.map((elem, index) => (
-                                    <CollectionItem key={elem.question} href={`/questioncard/${index + 1}`}> {index + 1}.  {elem.question}     <Badge  >{elem.in_category}</Badge>
+                            <Table>{this.state.questions.map((elem) => (
+                                <tr key={elem.id}>
+                                    <td>{elem.id}.</td><td key={elem.question}>
+                                        <Link className="rowlink" to={`/questioncard/${elem.id}`}>{elem.question}</Link>
+                                    </td>
+                                    <td><span className="tag is-primary">{elem.in_category}</span>
+                                    </td></tr>
+                            ))}</Table>
 
-                                    </CollectionItem>
-                                ))}
-                            </List>
 
                         </div>
                     </div>

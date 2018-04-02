@@ -4,21 +4,15 @@ import React, { Component } from "react";
 class LoginPanel extends React.Component {
     constructor() {
         super();
-        this.state = { tab: "signin", email: "", pw: "" };
+        this.state = { tab: "signin", email: "", pw: "" , pw2:""};
         // this.renderTabs = this.renderTabs.bind(this);
         this.clickSignin = this.clickSignin.bind(this);
         this.clickSignup = this.clickSignup.bind(this);
-        // this.render = this.render.bind(this);
+        this.render = this.render.bind(this);
 
     }
 
-    handleEmailChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            email: value
-        });
-    };
-    renderTabs = () => {
+    renderTabs = (props) => {
         if (this.state.tab === "signin") {
             return (<div> <div>
                 <div className="tabs is-toggle is-fullwidth is-centered">
@@ -34,7 +28,7 @@ class LoginPanel extends React.Component {
                         <div className="field-body">
                             <div className="field">
                                 <p className="control has-icons-left has-icons-right">
-                                    <input className="input is-rounded" type="email" placeholder="Email" />
+                                    <input className="input is-rounded" type="email" placeholder="Email" onChange={this.props.handleEmailChange}/>
                                     <span className="icon is-small is-left">
                                         <i className="fas fa-envelope"></i>
                                     </span>
@@ -50,7 +44,7 @@ class LoginPanel extends React.Component {
                         <div className="field-body">
                             <div className="field">
                                 <p className="control has-icons-left">
-                                    <input className="input is-rounded" type="password" placeholder="Password" />
+                                    <input className="input is-rounded" type="password" placeholder="Password" onChange={this.props.handlePWChange} />
                                     <span className="icon is-small is-left">
                                         <i className="fas fa-lock"></i>
                                     </span>
@@ -62,7 +56,7 @@ class LoginPanel extends React.Component {
                     </div>
                     <div className="field is-grouped is-grouped-centered">
                         <div className="control">
-                            <button className="button is-primary is-inverted is-large " onClick={this.clickLoginBtn}>
+                            <button className="button is-primary is-inverted is-large " onClick={this.props.onClickLogin}>
                                 Login</button>
                         </div>
                     </div>
@@ -86,7 +80,7 @@ class LoginPanel extends React.Component {
                         <div className="field-body">
                             <div className="field">
                                 <p className="control has-icons-left has-icons-right">
-                                    <input className="input is-rounded" type="email" placeholder="Email" />
+                                    <input className="input is-rounded" type="email" placeholder="Email" onChange={this.props.handleEmailChange} />
                                     <span className="icon is-small is-left">
                                         <i className="fas fa-envelope"></i>
                                     </span>
@@ -103,7 +97,7 @@ class LoginPanel extends React.Component {
                         <div className="field-body">
                             <div className="field">
                                 <p className="control has-icons-left">
-                                    <input className="input is-rounded" type="password" placeholder="Password" />
+                                    <input className="input is-rounded" type="password" placeholder="Password" onChange={this.props.handlePWChange} />
                                     <span className="icon is-small is-left">
                                         <i className="fas fa-lock"></i>
                                     </span>
@@ -117,7 +111,7 @@ class LoginPanel extends React.Component {
                         <div className="field-body">
                             <div className="field">
                                 <p className="control has-icons-left">
-                                    <input className="input is-rounded" type="password" placeholder="Password" />
+                                    <input className="input is-rounded" type="password" placeholder="Password" onChange={this.props.handlePW2Change}  />
                                     <span className="icon is-small is-left">
                                         <i className="fas fa-lock"></i>
                                     </span>
@@ -129,7 +123,7 @@ class LoginPanel extends React.Component {
                     </div>
                     <div className="field is-grouped is-grouped-centered">
                         <div className="control">
-                            <button className="button is-primary is-inverted is-large " onClick={this.clickSignupBtn}>
+                            <button className="button is-primary is-inverted is-large " onClick={this.props.onClickSignup}>
                                 Sign Up!</button>
                         </div>
                     </div>
@@ -146,7 +140,6 @@ class LoginPanel extends React.Component {
     clickSignup = () => {
         console.log("signup", this.state)
         this.setState({ tab: "signup" })
-
     }
 
     clickLoginBtn = () => {
@@ -154,7 +147,9 @@ class LoginPanel extends React.Component {
     }
     clickSignupBtn = () => {
         console.log("signup btn", this.state)
-
+        if(this.state.pw===this.state.pw2){
+            console.log("pw match")
+        }
     }
     render() {
         return (

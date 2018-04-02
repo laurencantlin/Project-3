@@ -1,5 +1,3 @@
-
-
 var Sequelize = require("sequelize");
 
 var sequelize = new Sequelize("lf9oky8cdp6qk65h", "krgwfxvslhvwuuq4", "z08h2iw9bhjyi7hh", {

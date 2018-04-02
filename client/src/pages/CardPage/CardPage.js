@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import Stack from "../../components/Stack"
 import API from "../../utils/API";
-import Container from "react-materialize/lib/Container";
+import Container from "../../components/Container";
+import Toast from "../../components/Toast";
 import Nav from "../../components/Nav";
-import { Row, Col, Toast} from "react-materialize";
+// import { Toast } from "react-materialize";
 import Card from "../../components/Card"
 import IconBtn from "../../components/IconBtn"
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 class CardPage extends Component {
     state = {
         questionid: window.location.pathname.split("/").pop(),
         question: "",
         view: "front",
-        updatedQuestion: { answer: "", question: "" }
+        toast: "hide"
+        // updatedQuestion: { answer: "", question: "" }
     }
 
     componentDidMount() {
@@ -45,7 +47,7 @@ class CardPage extends Component {
         console.log(event.target.value, "ans inputchange")
         this.setState({ answer: event.target.value });
         this.setState({
-            updatedQuestion: { answer: event.target.value }
+            updatedQuestion: { question: this.state.question, answer: event.target.value }
         });
 
     }
@@ -54,16 +56,24 @@ class CardPage extends Component {
         console.log(event.target.value, "q inputchange")
         this.setState({ question: event.target.value });
         this.setState({
-            updatedQuestion: { question: event.target.value }
+            updatedQuestion: { question: event.target.value, answer: this.state.answer }
         });
     }
     onSaveChanges = (event) => {
         event.preventDefault();
-        console.log("clicksave")
-        API.updateQuestion(this.state,this.state.updatedQuestion)
-            .then(res => this.loadQCard(this.state.questionid))
-            // .then(res=> this.event.value="")
-            .catch(err => console.log(err));
+        console.log(event)
+        if (this.state.question === "") {
+
+        }
+        if (this.state.updatedQuestion && this.state.question !== "") {
+            console.log("true")
+            API.updateQuestion(this.state.questionid, this.state.updatedQuestion)
+                .then(res => this.loadQCard(this.state.questionid))   
+                // .then(res=> this.event.value="")
+                .catch(err => console.log(err));
+                this.setState({toast:"show"});
+        }
+
     };
 
     toggleView = (event) => {
@@ -71,7 +81,7 @@ class CardPage extends Component {
         if (this.state.view === "front" || this.state.view === "back") {
             this.setState({ view: "fullview" })
             console.log("bothsides");
-            this.renderCardToolIcons();
+            // this.renderCardToolIcons();
         }
         else if (this.state.view === "fullview") {
             this.setState({ view: "front" })
@@ -82,67 +92,100 @@ class CardPage extends Component {
 
     renderCard = () => {
         if (this.state.view === "front") {
-            return <Card cardText={this.state.question} handleInputChange={this.handleQuestionInputChange}></Card>
+            return <div className="column is-5"><Card cardText={this.state.question} handleInputChange={this.handleQuestionInputChange}></Card></div>
         }
 
         else if (this.state.view === "back") {
-            return <Card cardText={this.state.answer} handleInputChange={this.handleAnswerInputChange}></Card>
+            return <div className="column is-5"><Card cardText={this.state.answer} handleInputChange={this.handleAnswerInputChange}></Card></div>
         }
         else if (this.state.view === "fullview") {
-            return <div>
+            return <div className="column is-5">
                 <Card cardText={this.state.question} handleInputChange={this.handleQuestionInputChange}></Card>
+
+                <br />
                 <Card cardText={this.state.answer} handleInputChange={this.handleAnswerInputChange}></Card>
             </div>
         }
+        //    </div> }
     }
+
     renderCardToolIcons = () => {
         if (this.state.view === "front" || this.state.view === "back") {
-            return <div>
-                <Col s={2} offset="m3" className='grid-example'>
-                    <IconBtn flat spanclasses="has-text-dark icon " icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
+            return <div className="columns level-item is-centered">
 
-                </Col>
-                <Col s={1} offset="s10 m3" className='grid-example'>
-                    <IconBtn onClick={this.flipCard} spanclasses="has-text-dark icon" icon="fas fa-lg fa-retweet" ></IconBtn>
-                </Col>
+                <div className="column is-centered auto">
+                </div>
+
+                <div className="column is-clearfix is-centered is-4">
+                    <IconBtn flat level="level-left" spanclasses="has-text-dark icon is-medium " icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
+
+                </div>
+                <div className="column is-centered is-1">
+                    <IconBtn onClick={this.flipCard} level="level-right" spanclasses="has-text-dark icon is-medium" icon="fas fa-lg fa-retweet" ></IconBtn>
+                </div>
+                <div className="column is-centered auto">
+
+                    {/* <Toast /> */}
+                </div>
             </div>
+
         }
         else if (this.state.view === "fullview") {
             console.log("hi")
-            return <div>
-                <Col s={1} offset="m3" className='grid-example'>
-                    <IconBtn flat spanclasses="has-text-dark icon " icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
+            return <div className="columns level is-centered">
 
-                </Col>
+                <div className="column is-5">
+                    <IconBtn level="level-left" spanclasses="has-text-dark icon is-medium" icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
+
+                </div>
             </div>
         }
     }
+    renderToast = () => {
+        if(this.state.toast==="show"){
+            
+        return (
+            <Toast className="notification toast is-dark play"></Toast>
+        )}
+    }
+
     render() {
         return (
-            <div>
+            <div className="has-text-centered">
                 <Nav />
-                <Container>
-                    <Row>
+                {/* <Toast/> */}
+                {this.renderToast()}
 
-                    </Row>
-                    <Row>
-                        <Col s={1} className='grid-example'>
-                            <IconBtn flat medium onClick={this.flipCard} icon="">chevron_left</IconBtn>
-                        </Col>
-                        <Col s={1} offset="s10" className='grid-example'>
-                            <IconBtn flat medium right onClick={this.flipCard} icon="add">chevron_right</IconBtn>
-                        </Col>
-                    </Row>
-                    <Row>
-                        {this.renderCardToolIcons()}
+                <Container>
+                    <br />
+
+                    {this.renderCardToolIcons()}
+
+                    {/* {this.renderToast()} */}
+
+
+                    {/* <div className="level-item "> */}
+                    {/* </div>                    {this.renderToast()} */}
+
+                    <div className="columns  is-clearfix is-centered">
                         {this.renderCard()}
-                    </Row>
-                    <Row>
-                        <div className="is-centered buttons">
-                            <span onClick={this.onSaveChanges} className="button is-centered is-primary">Save Changes</span>
+
+                    </div>
+                    <br />
+                    <div className="columns level is-centered is-5">
+
+                        <div className="column is-3">
+                            <span onClick={this.onSaveChanges} className="button  level-item is-primary">          Save Changes
+                            </span>
+
                         </div>
-                    </Row>
+                    </div>
+                    <div className="columns level is-centered is-5">
+
+                    </div>
                 </Container>
+
+                {/* <Toast className="notification toast is-dark"></Toast> */}
             </div>
         )
     }
