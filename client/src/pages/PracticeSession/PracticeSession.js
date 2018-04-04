@@ -6,7 +6,6 @@ import Capture from "../../components/Capture"
 // import { Row, Col } from "react-materialize";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
-
 import CountDown from "../../components/CountDown";
 
 class PracticeSession extends Component {
@@ -56,10 +55,10 @@ class PracticeSession extends Component {
                         this.setState({ possibleQuestions: [...deck] })
                         this.setState({
                             listLength: this.state.possibleQuestions.length,
-                            ranNum:[Math.floor(Math.random() * this.state.possibleQuestions.length)],
-                            question: this.state.possibleQuestions[Math.floor(Math.random() * this.state.possibleQuestions.length)].id,
-                            answer: this.state.possibleQuestions[Math.floor(Math.random() * this.state.possibleQuestions.length)].answer,
-                            hint: this.state.possibleQuestions[Math.floor(Math.random() * this.state.possibleQuestions.length)].hint
+                            ranNum: [Math.floor(Math.random() * this.state.possibleQuestions.length)],
+                            question: this.state.possibleQuestions[Math.floor(Math.random() * this.state.possibleQuestions.length)].question
+                            // answer: this.state`.possibleQuestions[Math.floor(Math.random() * this.state.possibleQuestions.length)].answer,
+                            // hint: this.state.possibleQuestions[Math.floor(Math.random() * this.state.possi`bleQuestions.length)].hint
                         })
                     }
                 })
@@ -113,27 +112,20 @@ class PracticeSession extends Component {
                         <div className="columns is-centered">
                             <div className="column has-text-centered is-half-desktop">
                                 <CountDown time={this.state.secondsLeft} />
-                            </div></div>
+                            </div>
+                        </div>
                         <div className="columns is-centered">
                             <div className="column  has-text-centered is-one-third-desktop">
-                                {this.randomQuestion()}
-                                <Stack className="session-question card5"><div class="field is-grouped is-grouped-multiline">
-                                <div class="control">
+                                <Stack className="session-question card5">
+                                        <br/>
+                                        {this.state.question}
+                                </Stack>
 
-                                    <div class="tags has-addons">
-                                        {/* <span class="tag is-dark">Deck</span> */}
-                                        <span class="tag ">{this.state.in_deck}</span> <span class="tag is-primary">{this.state.in_category}</span>
-                                                                        </div>
-                                    </div>
-                                    </div><br />{this.state.question}
-                                    {this.setState(this.state.possibleQuestions[this.state.question])}</Stack>
-                            </div></div>
+                            </div>
+                            </div>
                             <div className="columns level-item is-centered">
                                 <div className="column has-text-centered">
                                     <button onClick={this.clickSkipBtn} className="button is-primary ">Next Question</button>
-
-                                    {/* <IconBtn onClick={this.clickSkipBtn} spanclasses="has-text-danger icon is-large" icon="fa fa-3x fa-times-circle" datatip="Skip" place="top"></IconBtn>
-                            <IconBtn spanclasses="icon is-large has-text-primary"  icon="fas fa-3x	fa-check-circle" onClick={this.clickCheckBtn} datatip="Next Question" place="top" /> */}
                                 </div>
                             </div>
                             <div className="columns  is-centered">
@@ -142,10 +134,10 @@ class PracticeSession extends Component {
                                 </div>
                             </div>
                     </Container>
+                        </div>
                 </div>
-                </div>
-                );
-            }
-        }
-        
-        export default PracticeSession;
+        );
+    }
+}
+
+export default PracticeSession;
