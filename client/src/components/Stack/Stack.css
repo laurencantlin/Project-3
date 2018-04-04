@@ -54,5 +54,6 @@
     color: rgb(53, 57, 62);
     font-size: 17px;
     text-align: center;
-    min-height: 150px;
+    height: 200px;
+    /* min-height: 150px; */
 }

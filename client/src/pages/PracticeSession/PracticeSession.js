@@ -21,7 +21,7 @@ class PracticeSession extends Component {
         in_deck: "",
         in_category: "",
         timer:0,
-        secondsLeft: 10
+        secondsLeft: 120
     }
 
     componentDidMount() {
@@ -41,7 +41,9 @@ class PracticeSession extends Component {
             secondsLeft: secondsLeft,
         });
         if (this.state.secondsLeft == 0) {
-            clearInterval(this.state.timer);
+            // clearInterval(this.state.timer);
+            this.clickSkipBtn()
+            console.log(9)
         }
     }
 
@@ -89,9 +91,11 @@ class PracticeSession extends Component {
         this.nextQuestion();
     }
     clickSkipBtn = (evt) => {
-        evt.preventDefault();
+        // evt.preventDefault();
         console.log("skip");
         this.nextQuestion();
+        this.setState({secondsLeft:121})
+            this.startTimer()
     }
     
     render() {
@@ -116,7 +120,7 @@ class PracticeSession extends Component {
                         </div></div>
                     <div className="columns level-item is-centered">
                         <div className="column has-text-centered">
-                        <button onClick={this.clickCheckBtn} className="button is-primary">Next Question</button>
+                        <button onClick={this.clickSkipBtn} className="button is-primary">Next Question</button>
  
                             {/* <IconBtn onClick={this.clickSkipBtn} spanclasses="has-text-danger icon is-large" icon="fa fa-3x fa-times-circle" datatip="Skip" place="top"></IconBtn>
                             <IconBtn spanclasses="icon is-large has-text-primary"  icon="fas fa-3x	fa-check-circle" onClick={this.clickCheckBtn} datatip="Next Question" place="top" /> */}
