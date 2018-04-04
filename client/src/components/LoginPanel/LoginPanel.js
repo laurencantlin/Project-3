@@ -9,7 +9,6 @@ class LoginPanel extends React.Component {
         this.clickSignin = this.clickSignin.bind(this);
         this.clickSignup = this.clickSignup.bind(this);
         this.render = this.render.bind(this);
-
     }
 
     renderTabs = (props) => {

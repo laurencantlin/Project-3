@@ -117,7 +117,7 @@ class CardPage extends Component {
                 </div>
 
                 <div className="column is-clearfix is-centered is-4">
-                    <IconBtn flat level="level-left" spanclasses="has-text-dark icon is-medium " icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
+                    <IconBtn level="level-left" spanclasses="has-text-dark icon is-medium" icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
 
                 </div>
                 <div className="column is-centered is-1">

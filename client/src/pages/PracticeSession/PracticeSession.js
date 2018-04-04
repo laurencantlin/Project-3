@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Container from "../../components/Container"
 import Stack from "../../components/Stack"
 import IconBtn from "../../components/IconBtn"
-import { Row, Col, Button, Icon } from "react-materialize";
+import Capture from "../../components/Capture"
+// import { Row, Col } from "react-materialize";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 
@@ -18,15 +19,31 @@ class PracticeSession extends Component {
         answer: "",
         hint: "",
         in_deck: "",
-        in_category: ""
-
+        in_category: "",
+        timer:0,
+        secondsLeft: 10
     }
 
     componentDidMount() {
         let deck = [];
         this.loadDeckQuestions(deck);
+        this.startTimer();
+    }
+    startTimer() {
+        if (this.state.timer == 0) {
+            this.state.timer= setInterval(() => this.counter(), 1000);
+        }
     }
 
+    counter(){
+        let secondsLeft = this.state.secondsLeft - 1;
+        this.setState({
+            secondsLeft: secondsLeft,
+        });
+        if (this.state.secondsLeft == 0) {
+            clearInterval(this.state.timer);
+        }
+    }
 
     loadDeckQuestions = (deck) => {
         for (let i = 0; i < this.state.decks.length; i++) {
@@ -47,9 +64,7 @@ class PracticeSession extends Component {
         }
     }
     randomQuestion = () => {
-        console.log(this.state.listLength)
-
-        // return <div><Stack classes="session-question card5">{this.state.question}</Stack></div>
+        // console.log(this.state.listLength)
     }
     nextQuestion = () => {
         // console.log(this.state.listLength)
@@ -58,11 +73,6 @@ class PracticeSession extends Component {
             answer: this.state.possibleQuestions[Math.floor(Math.random() * this.state.listLength)].answer,
             hint: this.state.possibleQuestions[Math.floor(Math.random() * this.state.listLength)].hint
         })
-        // return <div>
-        //     <Link to="/decks" className="stacklink">
-        //         <Stack className="card5">{this.state.question}</Stack>
-        //     </Link>
-        // </div>
     }
     clickViewModuleIcn = (event) => {
         event.preventDefault();
@@ -78,49 +88,47 @@ class PracticeSession extends Component {
         console.log("Next");
         this.nextQuestion();
     }
-
     clickSkipBtn = (evt) => {
         evt.preventDefault();
         console.log("skip");
         this.nextQuestion();
     }
-
+    
     render() {
         return (
-            <div>
-                <Container classes="boo">
-                    <Row></Row>
-                    <Row>
-                        <Col s={1} offset="s2">
-                            <IconBtn spanclasses="icon is-medium" icon="fas fa-lg	fa-arrow-left" datatip="Back" place="bottom" flat floating onClick={this.clickBackIcn}></IconBtn>
-                        </Col>
-
-                        <Col s={1}>
-                            <IconBtn spanclasses="icon is-medium" icon="fas fa-lg	fa-th" flat floating datatip="Decks" onClick={this.clickBackIcn}></IconBtn>
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col m={6} s={12} offset="m3">
-                            <CountDown />                        </Col>
-                    </Row>
-                    <Row>
-                        <Col m={6} s={12} offset="m3">
+            <div className="columns multiline is-centered">
+            <div className="column  is-offset-1-mobile is-10-mobile">
+                <Container className=" container">
+                    <div className="columns level-item  ">
+                        <div className="column is-full-mobile  is-one-third-desktop">
+                            <IconBtn spanclasses="icon is-large" icon="fas fa-lg	fa-arrow-left" datatip="Back" place="bottom"  onClick={this.clickBackIcn}></IconBtn>
+                            <IconBtn spanclasses="icon is-large" icon="fas fa-lg	fa-th" flat floating datatip="Decks" onClick={this.clickViewModuleIcn}></IconBtn>
+                        </div>
+                    </div>
+                    <div className="columns is-centered">
+                        <div className="column has-text-centered is-half-desktop">
+                            <CountDown time={this.state.secondsLeft}/>
+                        </div></div>
+                    <div className="columns is-centered">
+                        <div className="column  has-text-centered is-one-third-desktop">
                             {this.randomQuestion()}
-                            {/* <Link to="/decks" className="stacklink"> */}
-                                <Stack className="session-question card5">{this.state.question}</Stack>
-                            {/* </Link> */}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col s={1} offset="s5">
-                            <IconBtn floating onClick={this.clickSkipBtn} spanclasses="has-text-danger icon is-large" icon="fa fa-3x	fa-times-circle"  datatip="Skip" place="top"></IconBtn>
-                        </Col>
-                        <Col s={1} >
-                            <IconBtn floating spanclasses="icon is-large has-text-primary" icon="fas fa-3x	fa-check-circle"  onClick={this.clickCheckBtn} datatip="Next Question" place="top" />
-                        </Col>
-                    </Row>
+                            <Stack className="session-question card5">{this.state.question}</Stack>
+                        </div></div>
+                    <div className="columns level-item is-centered">
+                        <div className="column has-text-centered">
+                        <button onClick={this.clickCheckBtn} className="button is-primary">Next Question</button>
+ 
+                            {/* <IconBtn onClick={this.clickSkipBtn} spanclasses="has-text-danger icon is-large" icon="fa fa-3x fa-times-circle" datatip="Skip" place="top"></IconBtn>
+                            <IconBtn spanclasses="icon is-large has-text-primary"  icon="fas fa-3x	fa-check-circle" onClick={this.clickCheckBtn} datatip="Next Question" place="top" /> */}
+                        </div>
+                    </div>
+                    <div className="columns  is-centered">
+                        <div className="column  is-half-desktop">
+                        <Capture props="hi"/>
+                        </div>
+                        </div>
                 </Container>
+            </div>
             </div>
         );
     }
