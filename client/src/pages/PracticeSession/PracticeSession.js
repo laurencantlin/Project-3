@@ -20,7 +20,7 @@ class PracticeSession extends Component {
         hint: "",
         in_deck: "",
         in_category: "",
-        timer:0,
+        timer: 0,
         secondsLeft: 120
     }
 
@@ -31,11 +31,11 @@ class PracticeSession extends Component {
     }
     startTimer() {
         if (this.state.timer == 0) {
-            this.state.timer= setInterval(() => this.counter(), 1000);
+            this.state.timer = setInterval(() => this.counter(), 1000);
         }
     }
 
-    counter(){
+    counter() {
         let secondsLeft = this.state.secondsLeft - 1;
         this.setState({
             secondsLeft: secondsLeft,
@@ -56,7 +56,8 @@ class PracticeSession extends Component {
                         this.setState({ possibleQuestions: [...deck] })
                         this.setState({
                             listLength: this.state.possibleQuestions.length,
-                            question: this.state.possibleQuestions[Math.floor(Math.random() * this.state.possibleQuestions.length)].question,
+                            ranNum:[Math.floor(Math.random() * this.state.possibleQuestions.length)],
+                            question: this.state.possibleQuestions[Math.floor(Math.random() * this.state.possibleQuestions.length)].id,
                             answer: this.state.possibleQuestions[Math.floor(Math.random() * this.state.possibleQuestions.length)].answer,
                             hint: this.state.possibleQuestions[Math.floor(Math.random() * this.state.possibleQuestions.length)].hint
                         })
@@ -94,48 +95,57 @@ class PracticeSession extends Component {
         // evt.preventDefault();
         console.log("skip");
         this.nextQuestion();
-        this.setState({secondsLeft:121})
-            this.startTimer()
+        this.setState({ secondsLeft: 120 })
+        this.startTimer()
     }
-    
+
     render() {
         return (
             <div className="columns multiline is-centered">
-            <div className="column  is-offset-1-mobile is-10-mobile">
-                <Container className=" container">
-                    <div className="columns level-item  ">
-                        <div className="column is-full-mobile  is-one-third-desktop">
-                            <IconBtn spanclasses="icon is-large" icon="fas fa-lg	fa-arrow-left" datatip="Back" place="bottom"  onClick={this.clickBackIcn}></IconBtn>
-                            <IconBtn spanclasses="icon is-large" icon="fas fa-lg	fa-th" flat floating datatip="Decks" onClick={this.clickViewModuleIcn}></IconBtn>
+                <div className="column  is-offset-1-mobile is-10-mobile">
+                    <Container className=" container">
+                        <div className="columns level-item  ">
+                            <div className="column is-full-mobile  is-one-third-desktop">
+                                <IconBtn spanclasses="icon is-large" icon="fas fa-lg	fa-arrow-left" datatip="Back" place="bottom" onClick={this.clickBackIcn}></IconBtn>
+                                <IconBtn spanclasses="icon is-large" icon="fas fa-lg	fa-th" flat floating datatip="Decks" onClick={this.clickViewModuleIcn}></IconBtn>
+                            </div>
                         </div>
-                    </div>
-                    <div className="columns is-centered">
-                        <div className="column has-text-centered is-half-desktop">
-                            <CountDown time={this.state.secondsLeft}/>
-                        </div></div>
-                    <div className="columns is-centered">
-                        <div className="column  has-text-centered is-one-third-desktop">
-                            {this.randomQuestion()}
-                            <Stack className="session-question card5">{this.state.question}</Stack>
-                        </div></div>
-                    <div className="columns level-item is-centered">
-                        <div className="column has-text-centered">
-                        <button onClick={this.clickSkipBtn} className="button is-primary">Next Question</button>
- 
-                            {/* <IconBtn onClick={this.clickSkipBtn} spanclasses="has-text-danger icon is-large" icon="fa fa-3x fa-times-circle" datatip="Skip" place="top"></IconBtn>
-                            <IconBtn spanclasses="icon is-large has-text-primary"  icon="fas fa-3x	fa-check-circle" onClick={this.clickCheckBtn} datatip="Next Question" place="top" /> */}
-                        </div>
-                    </div>
-                    <div className="columns  is-centered">
-                        <div className="column  is-half-desktop">
-                        <Capture props="hi"/>
-                        </div>
-                        </div>
-                </Container>
-            </div>
-            </div>
-        );
-    }
-}
+                        <div className="columns is-centered">
+                            <div className="column has-text-centered is-half-desktop">
+                                <CountDown time={this.state.secondsLeft} />
+                            </div></div>
+                        <div className="columns is-centered">
+                            <div className="column  has-text-centered is-one-third-desktop">
+                                {this.randomQuestion()}
+                                <Stack className="session-question card5"><div class="field is-grouped is-grouped-multiline">
+                                <div class="control">
 
-export default PracticeSession;
+                                    <div class="tags has-addons">
+                                        {/* <span class="tag is-dark">Deck</span> */}
+                                        <span class="tag ">{this.state.in_deck}</span> <span class="tag is-primary">{this.state.in_category}</span>
+                                                                        </div>
+                                    </div>
+                                    </div><br />{this.state.question}
+                                    {this.setState(this.state.possibleQuestions[this.state.question])}</Stack>
+                            </div></div>
+                            <div className="columns level-item is-centered">
+                                <div className="column has-text-centered">
+                                    <button onClick={this.clickSkipBtn} className="button is-primary ">Next Question</button>
+
+                                    {/* <IconBtn onClick={this.clickSkipBtn} spanclasses="has-text-danger icon is-large" icon="fa fa-3x fa-times-circle" datatip="Skip" place="top"></IconBtn>
+                            <IconBtn spanclasses="icon is-large has-text-primary"  icon="fas fa-3x	fa-check-circle" onClick={this.clickCheckBtn} datatip="Next Question" place="top" /> */}
+                                </div>
+                            </div>
+                            <div className="columns  is-centered">
+                                <div className="column  is-half-desktop">
+                                    <Capture props="hi" />
+                                </div>
+                            </div>
+                    </Container>
+                </div>
+                </div>
+                );
+            }
+        }
+        
+        export default PracticeSession;

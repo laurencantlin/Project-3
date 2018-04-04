@@ -14,7 +14,6 @@ class Capture extends React.Component {
     componentDidMount() {
         console.log(this)
         document.getElementById('stop-btn').setAttribute('disabled', '')
-
         this.detectCamera();
         this.getMedia();
     }
@@ -30,25 +29,110 @@ class Capture extends React.Component {
         }
     }
     getMedia = () => {
-        navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 }, audio: true }).
+        navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 }, audio: {latency:0.005804988662131519, sampleRate:
+            44100, channelCount:2, autoGainControl: true, echoCancellation:true,
+
+
+        } }).
             then(this.handleSuccess).catch(this.handleError);
-        // console.log(stream)
+        // console.log(stream, audioCtx)
     }
     handleError = (error) => {
         console.error('Error: ', error);
     }
     handleSuccess = (stream) => {
-        console.log(stream)
+        var mainSection = document.querySelector('.main-controls');
+
+        // var canvas = document.querySelector('.visualizer');
+
+        var audioCtx = new (window.AudioContext)();
+        // var canvasCtx = canvas.getContext("2d");
+        var source = audioCtx.createMediaStreamSource(stream);
+        var analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        var bufferLength = analyser.frequencyBinCount;
+        var dataArray = new Uint8Array(bufferLength);
+
+        var source = audioCtx.createMediaStreamSource(stream);
+
+        var analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        var bufferLength = analyser.frequencyBinCount;
+        var dataArray = new Uint8Array(bufferLength);
+
+        var video = document.querySelector('#screenshot-video');
+        source.connect(analyser);
+        video.srcObject = stream
+        source.connect(analyser);
+        console.log(audioCtx)
+        console.log(dataArray)
+        console.log(analyser)
         var video = document.querySelector('#screenshot-video');
         video.srcObject = stream;
         this.setState({ src: video.src, stream: stream })
         console.log(stream)
         // this.clickRecord()
+
     }
-    // newMedia=()=>{
-    //     var mediaRecorder = new MediaRecorder(this.state.stream);
-    //     return mediaRecorder
-    // }
+    visualize = (stream, audioCtx) => {
+        var source = audioCtx.createMediaStreamSource(stream);
+
+        var analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        var bufferLength = analyser.frequencyBinCount;
+        var dataArray = new Uint8Array(bufferLength);
+
+        var video = document.querySelector('#screenshot-video');
+        source.connect(analyser);
+        video.srcObject = stream
+        //analyser.connect(audioCtx.destination);
+        // var video = document.querySelector('#screenshot-video');
+        // video.srcObject = stream;
+        // draw()
+
+        // function draw() {
+        //     var canvas = document.querySelector('#screenshot-video');
+        //     var WIDTH = canvas.width
+        //     var HEIGHT = canvas.height;
+
+        //     requestAnimationFrame(draw);
+
+        //     analyser.getByteTimeDomainData(dataArray);
+
+        //     canvasCtx.fillStyle = 'rgb(200, 200, 200)';
+        //     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+        //     canvasCtx.lineWidth = 2;
+        //     canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+
+        //     canvasCtx.beginPath();
+
+        //     var sliceWidth = WIDTH * 1.0 / bufferLength;
+        //     var x = 0;
+
+
+        //     for (var i = 0; i < bufferLength; i++) {
+
+        //         var v = dataArray[i] / 128.0;
+        //         var y = v * HEIGHT / 2;
+
+        //         if (i === 0) {
+        //             canvasCtx.moveTo(x, y);
+        //         } else {
+        //             canvasCtx.lineTo(x, y);
+        //         }
+
+        //         x += sliceWidth;
+        //     }
+
+        //     canvasCtx.lineTo(canvas.width, canvas.height / 2);
+        //     canvasCtx.stroke();
+
+        // }
+    }
+
+
+
     clickRecord = () => {
 
         // console.log(this.newMedia())
@@ -74,12 +158,12 @@ class Capture extends React.Component {
             video.src = videoURL;
             var render = document.querySelector('#hi');
         }
-                document.getElementById('stop-btn').removeAttribute('disabled');
+        document.getElementById('stop-btn').removeAttribute('disabled');
         // this.renderVideoBtns();
 
     }
     stopRecord = (e) => {
-e.preventDefault()
+        e.preventDefault()
         var videoURL;
         // this.setState({ recording: false })
         document.getElementById('stop-btn').setAttribute('disabled', '');
@@ -107,10 +191,10 @@ e.preventDefault()
         // document.getElementById('stop-btn').setAttribute('disabled', '')
         return (<div className="columns ">
             <div className="column is-half is-grouped field  ">
-                <button className="button has-text-centered is-primary control is-expanded " onClick={this.clickRecord}>Record</button>
+                <button className="button is-inverted has-text-centered is-danger control is-expanded " onClick={this.clickRecord}>Record</button>
             </div>
             <div className="column is-half is-grouped field ">
-                <button  className="button has-text-centered control is-expanded is-primary " id="stop-btn" onClick={this.stopRecord}>Stop</button>
+                <button className="button has-text-centered control is-expanded is-danger " id="stop-btn" onClick={this.stopRecord}>Stop</button>
             </div>
         </div >)
     }
