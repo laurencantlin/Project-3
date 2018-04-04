@@ -52,17 +52,16 @@ class Questions extends Component {
 
                     </div>
                 </section>
-                <Container classes="container">
-                    <div className="columns is-centered">
+                <Container className="container">
+                    <div className="columns is-centered is-multiline">
                         <div className="column is-10 ">
-                            <div className="field has-addons">
-                                <div className="control">
-                                    <input className="input" type="text" placeholder="Find a repository" onChange={this.handleInputChange} />
+                            <div className="field is-grouped">
+                                <div className="control is-expanded">
+                                    <input className="input is-large" type="text" placeholder="Add a new card" onChange={this.handleInputChange} />
                                 </div>
                                 <div className="control">
-                                    <a className="button is-info" onClick={this.onAddQuestion} >
-                                        Search
-    </a>
+                                <button className="button is-large is-primary" onClick={this.onAddQuestion}>Add Card</button>
+                               
                                 </div>
                             </div>
                             <Table>{this.state.questions.map((elem) => (
@@ -70,7 +69,7 @@ class Questions extends Component {
                                     <td>{elem.id}.</td><td key={elem.question}>
                                         <Link className="rowlink" to={`/questioncard/${elem.id}`}>{elem.question}</Link>
                                     </td>
-                                    <td><span className="tag is-primary">{elem.in_category}</span>
+                                    <td><span className="tag is-light">{elem.in_category}</span>
                                     </td></tr>
                             ))}</Table>
 

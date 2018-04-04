@@ -23,6 +23,9 @@ class PracticeSetup extends Component {
             )
             .catch(err => console.log(err));
     };
+    clickPracticeBtn = ()=>{
+        
+    }
     render() {
         return (
             <div>
@@ -33,15 +36,28 @@ class PracticeSetup extends Component {
                         {/* <Input placeholder="Placeholder" s={6} label="First Name" />
                             <Input s={12} label="Last Name" />
                             <Input s={12} label="disabled" defaultValue="I am not editable" disabled /> */}
-                       
-                        {/* </Row> */}
-                        <Row>
-                            Include Decks:
-                        </Row>
-                        {this.state.decks.map(deck => <Row><Input name='group1' type='checkbox' label={deck.DeckName} /></Row>)}
 
+                        {/* </Row> */}
+                        <div className="columns is-gapless is-multiline">
+                            <div className="column">
+
+                                Include Decks:
+
+                                {this.state.decks.map(deck => <div className="column">
+                                    <label className="checkbox"><input name='group1' type='checkbox' /> {deck.DeckName} </label> </div>
+                                )}
+                            </div>
+
+                        </div>
+                        {/* <div class="select is-multiple">
+                        <select multiple size="8">
+                                <option value="Argentina">Rounded dropdown</option>
+                                <option value="Argentina">With options</option>
+                            </select>
+                        </div> */}
+                        <button onClick={this.clickPracticeBtn}>Practice</button>
                     </form>
-                    <Link to="/practicesession">Practice</Link>
+                    {/* <Link to="/practicesession">Practice</Link> */}
 
                 </Container>
             </div>

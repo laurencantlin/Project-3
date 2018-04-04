@@ -1,15 +1,6 @@
 const router = require("express").Router();
 const decksController = require("../../controllers/decksController");
-
-
-  router.route("/")
+router.route("/")
   .get(decksController.findAll)
   .post(decksController.newDeck)
-// // Matches with "/api/books/:id"
-// router
-//   .route("/:id")
-//   .get(booksController.findById)
-//   .put(booksController.update)
-//   .delete(booksController.remove);
-
 module.exports = router;

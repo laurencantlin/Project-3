@@ -9,10 +9,12 @@ class IconBtn extends Component {
 
 
     render = (props) => {
-        return     <a className={this.props.level}>
-        <span className={this.props.spanclasses} onClick={this.props.onClick}><i data-fa-transform={this.props.rotate} className={this.props.icon}></i></span>
-      </a>
-            {/* <Button 
+        return (<a className={this.props.level}>
+            <span className={this.props.spanclasses} onClick={this.props.onClick}>
+                <i data-fa-transform={this.props.rotate} className={this.props.icon}></i>
+            </span>
+        </a>)
+        {/* <Button 
             onClick={this.props.onClick}
             className={this.props.classes}
              large={this.props.large}
@@ -24,8 +26,8 @@ class IconBtn extends Component {
             <ReactTooltip id="tip"
              type={this.props.type}             
               effect="solid"></ReactTooltip> */}
-           
-             
+
+
     }
 }
 
