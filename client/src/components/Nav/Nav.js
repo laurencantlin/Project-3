@@ -13,9 +13,9 @@ const Nav = (props) =>
         </div>
         <div  className="navbar-menu">
           <div className="navbar-end">
-            <Link to="/practicesetup" className="navbar-item">
+            {/* <Link to="/practicesetup" className="navbar-item">
               Practice
-            </Link>
+            </Link> */}
             <span className="navbar-item">
             <Link to="/practicesession" className="button has-text-bold is-primary">
               Practice

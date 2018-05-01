@@ -68,10 +68,10 @@ class CardPage extends Component {
         if (this.state.updatedQuestion && this.state.question !== "") {
             console.log("true")
             API.updateQuestion(this.state.questionid, this.state.updatedQuestion)
-                .then(res => this.loadQCard(this.state.questionid))   
+                .then(res => this.loadQCard(this.state.questionid))
                 // .then(res=> this.event.value="")
                 .catch(err => console.log(err));
-                this.setState({toast:"show"});
+            this.setState({ toast: "show" });
         }
 
     };
@@ -89,14 +89,21 @@ class CardPage extends Component {
             this.renderCardToolIcons();
         }
     }
-
+    nextCard = () => { 
+        let next=this.state.questionid+1
+        window.location.href = (`/questioncard/${next}`)
+    }
+    backCard = () => { }
     renderCard = () => {
         if (this.state.view === "front") {
             return <div className="column is-5"><Card cardText={this.state.question} handleInputChange={this.handleQuestionInputChange}></Card></div>
         }
 
         else if (this.state.view === "back") {
-            return <div className="column is-5"><Card cardText={this.state.answer} handleInputChange={this.handleAnswerInputChange}></Card></div>
+            if (this.state.answer === null) { return <div className="column is-5"><Card cardText="" handleInputChange={this.handleAnswerInputChange}></Card></div> }
+            else {
+                return <div className="column is-5"><Card cardText={this.state.answer} handleInputChange={this.handleAnswerInputChange}></Card></div>
+            }
         }
         else if (this.state.view === "fullview") {
             return <div className="column is-5">
@@ -117,15 +124,15 @@ class CardPage extends Component {
                 </div>
 
                 <div className="column is-clearfix is-centered is-4">
-                    <IconBtn level="level-left" spanclasses="has-text-dark icon is-medium" icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
+
+                    <a className="level-left"><span onClick={this.toggleView} className="has-text-dark"><i className="material-icons" >view_agenda</i></span></a>
+                    {/* <IconBtn level="level-left" spanclasses="has-text-dark icon is-medium" icon="fas fa-lg fa-columns" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn> */}
 
                 </div>
                 <div className="column is-centered is-1">
                     <IconBtn onClick={this.flipCard} level="level-right" spanclasses="has-text-dark icon is-medium" icon="fas fa-lg fa-retweet" ></IconBtn>
                 </div>
                 <div className="column is-centered auto">
-
-                    {/* <Toast /> */}
                 </div>
             </div>
 
@@ -133,20 +140,22 @@ class CardPage extends Component {
         else if (this.state.view === "fullview") {
             console.log("hi")
             return <div className="columns level is-centered">
-
                 <div className="column is-5">
-                    <IconBtn level="level-left" spanclasses="has-text-dark icon is-medium" icon="fas fa-lg fa-pause" rotate="rotate-90" large onClick={this.toggleView} ></IconBtn>
+                    <a className="level-left"><span onClick={this.toggleView} className="has-text-dark"><i className="material-icons" >crop_landscape</i></span></a>
+                    {/* <IconBtn level="level-left" spanclasses="has-text-dark icon is-medium" icon="fas fa-lg fa-square" rotate="rotate-180"  onClick={this.toggleView} >
+                    </IconBtn> */}
 
                 </div>
             </div>
         }
     }
     renderToast = () => {
-        if(this.state.toast==="show"){
-            
-        return (
-            <Toast className="notification toast is-dark play"></Toast>
-        )}
+        if (this.state.toast === "show") {
+
+            return (
+                <Toast className="notification toast is-dark play"></Toast>
+            )
+        }
     }
 
     render() {
@@ -154,31 +163,26 @@ class CardPage extends Component {
             <div className="has-text-centered">
                 <Nav />
                 {/* <Toast/> */}
-                {this.renderToast()}
+                {/* {this.renderToast()} */}
 
                 <Container>
                     <br />
 
                     {this.renderCardToolIcons()}
-
-                    {/* {this.renderToast()} */}
-
-
-                    {/* <div className="level-item "> */}
-                    {/* </div>                    {this.renderToast()} */}
-
                     <div className="columns  is-clearfix is-centered">
                         {this.renderCard()}
 
                     </div>
                     <br />
                     <div className="columns level is-centered is-5">
-
+                        <IconBtn spanclasses="icon is-large" icon="fas fa-lg	fa-arrow-left" datatip="Back" place="bottom" onClick={this.backCard}></IconBtn>
                         <div className="column is-3">
                             <span onClick={this.onSaveChanges} className="button  level-item is-primary">          Save Changes
                             </span>
 
                         </div>
+
+                        <IconBtn spanclasses="icon is-large" icon="fas fa-lg	fa-arrow-right" datatip="Back" place="bottom" onClick={this.nextCard}></IconBtn>
                     </div>
                     <div className="columns level is-centered is-5">
 
