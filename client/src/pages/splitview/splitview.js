@@ -8,7 +8,6 @@ import API from "../../utils/API";
 import Container from "../../components/Container";
 import Toast from "../../components/Toast";
 import Nav from "../../components/Nav";
-// import { Toast } from "react-materialize";
 import Card from "../../components/Card"
 import IconBtn from "../../components/IconBtn"
 import { Link } from "react-router-dom";
@@ -84,7 +83,6 @@ class splitview extends Component {
             console.log("true")
             API.updateQuestion(this.state.questionid, this.state.updatedQuestion)
                 .then(res => this.loadQCard(this.state.questionid))
-                // .then(res=> this.event.value="")
                 .catch(err => console.log(err));
             this.setState({ toast: "show" });
         }
@@ -96,7 +94,6 @@ class splitview extends Component {
         if (this.state.view === "front" || this.state.view === "back") {
             this.setState({ view: "fullview" })
             console.log("bothsides");
-            // this.renderCardToolIcons();
         }
         else if (this.state.view === "fullview") {
             this.setState({ view: "front" })
