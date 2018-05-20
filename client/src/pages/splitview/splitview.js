@@ -86,7 +86,6 @@ class splitview extends Component {
                 .catch(err => console.log(err));
             this.setState({ toast: "show" });
         }
-
     };
 
     toggleView = (event) => {
