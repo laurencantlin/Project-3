@@ -63,7 +63,6 @@ class splitview extends Component {
         this.setState({
             updatedQuestion: { question: this.state.question, answer: event.target.value }
         });
-
     }
     handleQuestionInputChange = (event) => {
         event.preventDefault();
